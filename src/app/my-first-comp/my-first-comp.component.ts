@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, AfterViewInit, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { MyFirstService } from '../services/my-first.service';
 
@@ -9,10 +9,11 @@ import { MyFirstService } from '../services/my-first.service';
 })
 export class MyFirstCompComponent implements AfterViewInit {
   name: string = '';
-  email: string = '';
+  email: string = ''; 
   message: string = '';
   isSubmitted: boolean = false;
   messages : Array<any> = [] ;
+  // private service : MyFirstService = inject(MyFirstService); // proprety injection 
 
   nameInput: HTMLInputElement | null = null;
   emailInput: HTMLInputElement | null = null;
@@ -22,7 +23,7 @@ export class MyFirstCompComponent implements AfterViewInit {
   constructor(
     @Inject(PLATFORM_ID)
      private platformId: Object ,
-     private service : MyFirstService
+     private service : MyFirstService // Constructor injection 
     ) {
       this.messages = this.service.getAllMessages();
       this.isSubmitted = this.messages.length > 0 ; // true cauz the init 7atit users donc length > 0 => true
