@@ -9,6 +9,10 @@ import { MyFirstService } from './services/my-first.service';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { AboutComponent } from './about/about.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { NewProductComponent } from './new-product/new-product.component';
 
 // const routes: Routes = [
 //   {
@@ -31,17 +35,22 @@ import { AboutComponent } from './about/about.component';
     MyFirstCompComponent,
     MessageDetailsComponent,
     MenuComponent,
-    AboutComponent
+    AboutComponent,
+    ProductsComponent,
+    ProductDetailsComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     //RouterModule.forRoot(routes)
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
-    MyFirstService
+    MyFirstService,
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })
