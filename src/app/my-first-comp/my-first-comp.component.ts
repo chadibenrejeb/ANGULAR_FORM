@@ -53,5 +53,9 @@ export class MyFirstCompComponent implements AfterViewInit {
       this.messageInput.value = '';
     }
   }
-}
+ }
+
+ deleteMessage(index: number): void {
+  this.messages.splice(index, 1);
+ }
 }
