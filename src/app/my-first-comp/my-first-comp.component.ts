@@ -29,6 +29,7 @@ export class MyFirstCompComponent implements AfterViewInit {
 
 
   onSubmit() {
+    if(this.name!="" && this.email!="" && this.message!= ""){
     console.log('Name:', this.name);
     console.log('Email:', this.email);
     console.log('Message:', this.message);
@@ -39,16 +40,18 @@ export class MyFirstCompComponent implements AfterViewInit {
       'message' : this.message
     });
     console.log(this.messages);
+  
      
 
-    // if (this.nameInput) {
-    //   this.nameInput.value = '';
-    // }
-    // if (this.emailInput) {
-    //   this.emailInput.value = '';
-    // }
-    // if (this.messageInput) {
-    //   this.messageInput.value = '';
-    //}
+    if (this.nameInput) {
+      this.nameInput.value = '';
+    }
+    if (this.emailInput) {
+      this.emailInput.value = '';
+    }
+    if (this.messageInput) {
+      this.messageInput.value = '';
+    }
   }
+}
 }

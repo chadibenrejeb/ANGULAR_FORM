@@ -67,6 +67,6 @@
   .flex-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    // justify-content: space-between;
+    flex-wrap: wrap; // to go back to new line when we reach the width of our container
   }
