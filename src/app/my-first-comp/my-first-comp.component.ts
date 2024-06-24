@@ -1,5 +1,6 @@
 import { Component, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { MyFirstService } from '../services/my-first.service';
 
 @Component({
   selector: 'app-my-first-comp',
@@ -11,16 +12,24 @@ export class MyFirstCompComponent implements AfterViewInit {
   email: string = '';
   message: string = '';
   isSubmitted: boolean = false;
+  messages : Array<any> = [] ;
 
   nameInput: HTMLInputElement | null = null;
   emailInput: HTMLInputElement | null = null;
   messageInput: HTMLTextAreaElement | null = null;
-  messages : Array<any> = [] ;
+  
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID)
+     private platformId: Object ,
+     private service : MyFirstService
+    ) {
+      this.messages = this.service.getAllMessages();
+      this.isSubmitted = this.messages.length > 0 ; // true cauz the init 7atit users donc length > 0 => true
+    }
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) { 
       this.nameInput = document.getElementById('name') as HTMLInputElement;
       this.emailInput = document.getElementById('email') as HTMLInputElement;
       this.messageInput = document.getElementById('message') as HTMLTextAreaElement;
@@ -34,11 +43,11 @@ export class MyFirstCompComponent implements AfterViewInit {
     console.log('Email:', this.email);
     console.log('Message:', this.message);
     this.isSubmitted = true;
-    this.messages.push({
-      'name' : this.name , 
-      'email': this.email,
-      'message' : this.message
-    });
+    this.service.insert({
+      "name" : this.name, 
+      "email" : this.email,
+      "message" : this.message
+      });
     console.log(this.messages);
   
      
@@ -56,6 +65,6 @@ export class MyFirstCompComponent implements AfterViewInit {
  }
 
  deleteMessage(index: number): void {
-  this.messages.splice(index, 1);
+  this.service.deleteMessage(index);
  }
 }
